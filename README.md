@@ -14,6 +14,6 @@ Generated using **ChatGPT**
 Generated using **ChatGPT**  
 ***N/B:** Make sure to install the necessary files for PIL (for image manipulation) and RealESRGAN (for image upscaling).*
 
-##  [(upscaled_jpg_rename.py)](https://github.com/MAOMislive/Image-Manipulation-Python/blob/main/upscaled_jpg_rename.py)  A Approach of combining upscaling, converting to JPEG and renaming the file.
+##  [(upscaled_jpg_rename.py)](https://github.com/MAOMislive/Image-Manipulation-Python/blob/main/upscaled_jpg_rename.py)  An easy approach to combine upscaling, converting to JPEG and renaming the file.
 Generated using **ChatGPT**  
 ***N/B:** Make sure to install the necessary files for PIL (for image manipulation) and RealESRGAN (for image upscaling).*
