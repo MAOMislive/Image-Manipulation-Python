@@ -1,38 +1,42 @@
+import cv2
 import os
-from PIL import Image
-from realesrgan import RealESRGAN
 
 
-def upscale_image(input_image_path, output_image_path, model):
-    # Open the input image
-    image = Image.open(input_image_path)
+def upscale_image(input_image_path, output_image_path, scale_factor):
+    # Read the input image
+    image = cv2.imread(input_image_path)
 
-    # Upscale the image
-    sr_image = model.predict(image)
+    # Resize the image
+    new_width = int(image.shape[1] * scale_factor)
+    new_height = int(image.shape[0] * scale_factor)
+    resized_image = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_LANCZOS4)
 
-    # Save the upscaled image
-    sr_image.save(output_image_path)
+    # Save the resized image
+    cv2.imwrite(output_image_path, resized_image)
     print(f"Upscaled image saved at {output_image_path}")
 
 
-def batch_upscale(input_dir, output_dir, scale=4, device='cuda'): # Use 'cpu' if you don't have a GPU
-    # Ensure the output directory exists
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+def upscale_batch(input_folder, output_folder, scale_factor):
+    # Create output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
-    # Initialize the RealESRGAN model
-    model = RealESRGAN(device=device)
-    model.load_weights('weights/RealESRGAN_x4.pth', download=True)  # Ensure the model weights are downloaded
+    # Get all files in the input folder
+    files = os.listdir(input_folder)
 
-    # Iterate over all files in the input directory
-    for filename in os.listdir(input_dir):
-        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp')):
-            input_image_path = os.path.join(input_dir, filename)
-            output_image_path = os.path.join(output_dir, filename)
-            upscale_image(input_image_path, output_image_path, model)
+    for file in files:
+        if file.endswith('.png') or file.endswith('.jpg') or file.endswith('.jpeg'):
+            input_image_path = os.path.join(input_folder, file)
+            output_image_path = os.path.join(output_folder, file)
+            upscale_image(input_image_path, output_image_path, scale_factor)
 
 
 # Example usage
-input_dir = 'path/to/your/input/directory'
-output_dir = 'path/to/your/output/directory'
-batch_upscale(input_dir, output_dir, scale=4, device='cuda')  # Use 'cpu' if you don't have a GPU
+input_folder = r'C:\Users\User\Desktop\Images\PNG'
+output_folder = r'C:\Users\User\Desktop\Images\JPEG'
+scale_factor = 4  # Adjust as needed
+
+upscale_batch(input_folder, output_folder, scale_factor)
+
+
+print('Done Upscaling!')
