@@ -12,7 +12,7 @@ def rename_files(input_folder):
     for i, file in enumerate(files):
         if os.path.isfile(os.path.join(input_folder, file)):
             # Construct new name
-            new_name = f"ODM_{i + 1}.png"
+            new_name = f"ODM_{i + 1}.jpg"
 
             # Rename file
             os.rename(os.path.join(input_folder, file), os.path.join(input_folder, new_name))
@@ -21,7 +21,7 @@ def rename_files(input_folder):
 
 
 # Example usage
-input_folder = r'C:\Users\User\Desktop\Iamges'
+input_folder = r'C:\Users\User\Desktop\Images'
 
 rename_files(input_folder)
 
