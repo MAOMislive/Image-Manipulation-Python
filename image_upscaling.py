@@ -1,22 +1,27 @@
-from PIL import Image
-from realesrgan import RealESRGAN
+import cv2
+import os
 
-def upscale_image(input_image_path, output_image_path, scale=4):
-    # Open the input image
-    image = Image.open(input_image_path)
-    
-    # Initialize the RealESRGAN model
-    model = RealESRGAN(device='cuda')  # Use 'cpu' if you don't have a GPU
-    model.load_weights('weights/RealESRGAN_x4.pth', download=True)  # Ensure the model weights are downloaded
-    
-    # Upscale the image
-    sr_image = model.predict(image)
-    
-    # Save the upscaled image
-    sr_image.save(output_image_path)
+
+def upscale_image(input_image_path, output_image_path, scale_factor):
+    # Read the input image
+    image = cv2.imread(input_image_path)
+
+    # Resize the image
+    new_width = int(image.shape[1] * scale_factor)
+    new_height = int(image.shape[0] * scale_factor)
+    resized_image = cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_LANCZOS4)
+
+    # Save the resized image
+    cv2.imwrite(output_image_path, resized_image)
     print(f"Upscaled image saved at {output_image_path}")
 
+
 # Example usage
-input_image_path = 'path/to/your/input/image.jpg'
-output_image_path = 'path/to/your/output/upscaled_image.jpg'
-upscale_image(input_image_path, output_image_path)
+input_folder = r'C:\Users\User\Desktop\Images\PNG'
+output_folder = r'C:\Users\User\Desktop\Images\JPEG'
+scale_factor = 4  # Adjust as needed
+
+upscale_image(input_folder, output_folder, scale_factor)
+
+
+print('Done Upscaling!')
