@@ -13,3 +13,7 @@ Generated using **ChatGPT**
 ##  [(batch_image_upscaling.py)](https://github.com/MAOMislive/Image-Manipulation-Python/blob/main/batch_image_upscaling.py)  An easy approach to Upscale in batch.
 Generated using **ChatGPT**  
 ***N/B:** Make sure to install the necessary files for PIL (for image manipulation) and RealESRGAN (for image upscaling).*
+
+##  [(upscaled_jpg_rename.py)](https://github.com/MAOMislive/Image-Manipulation-Python/blob/main/upscaled_jpg_rename.py)  A Approach of combining upscaling, converting to JPEG and renaming the file.
+Generated using **ChatGPT**  
+***N/B:** Make sure to install the necessary files for PIL (for image manipulation) and RealESRGAN (for image upscaling).*
